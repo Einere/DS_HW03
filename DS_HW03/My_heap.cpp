@@ -3,12 +3,13 @@
 
 
 My_heap::My_heap() {
-	
 	v.reserve(10);
 	//allocate memory for vector
 }
 
 My_heap::~My_heap() {
+	//pre : exist object
+	//post : clearly free allocated memery
 	v.clear();
 	//clear vector v
 	vector<char>().swap(v);
@@ -16,7 +17,9 @@ My_heap::~My_heap() {
 }
 
 void My_heap::insert(char input) {
-	//insert input to vector v and reheapification
+	//insert insert node having char input
+	//pre : input type is char
+	//post : maintain heap structure 
 	if (v.empty()) {
 		v.push_back(input);
 	}
@@ -24,11 +27,14 @@ void My_heap::insert(char input) {
 		v.push_back(input);
 		index = v.size()-1;
 		reheap_up(index);
+		//reheapification
 	}
 }
 
 void My_heap::reheap_up(int index) {
 	//reheapification upward, compare index with index's parent
+	//pre : index is child's index
+	//post : make heap structure
 	if ((int)floor((index - 1) / 2) < 0) {
 		//if index is root (index has no parent)
 		printf("index don't have parent\n");
@@ -53,27 +59,33 @@ void My_heap::reheap_up(int index) {
 			reheap_up((int)floor((index - 1) / 2));
 			//recursive reheapification upward
 		}
-		
 	}
 	return;
 }
 
 void My_heap::remove() {
+	//remove the largest node
+	//pre : exist node
+	//post : maintain heap structure
+	if (v.empty()) return;
+	//if don't exist node, do nothing
 	printf("size = %d\n", v.size());
 	printf("capacity = %d\n", v.capacity());
 	index = v.size() -1;
 	v.at(0) = v.at(index);
 	//copy last value to root
-	//v.at(index) = NULL;
 	v.pop_back();
 	
 	printf("size = %d\n", v.size());
 	printf("capacity = %d\n", v.capacity());
 	reheap_down(0);
+	//recursive reheapification downward
 }
 
 void My_heap::reheap_down(int index) {
 	//reheapification downward, compare index with index's children
+	//pre : index is child's index
+	//post : maintain heap structure
 	if ((index*2+1) >= v.size()) {
 		//if index has no child
 		printf("index has no child\n");

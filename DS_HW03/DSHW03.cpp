@@ -20,11 +20,10 @@ int main()
 	h.print_heap();
 	
 	h.remove();
-	h.print_heap();
-
 	h.remove();
-	h.print_heap();
-	
+	h.remove();
+	h.remove();
+	h.remove();
 	h.remove();
 	h.print_heap();
 
