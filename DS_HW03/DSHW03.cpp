@@ -17,9 +17,17 @@ int main()
 	h.insert('7');
 	h.insert('8');
 	h.insert('9');
-
 	h.print_heap();
 	
+	h.remove();
+	h.print_heap();
+
+	h.remove();
+	h.print_heap();
+	
+	h.remove();
+	h.print_heap();
+
 	system("pause");
 	return 0;
     return 0;

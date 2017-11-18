@@ -20,6 +20,5 @@
 #include <cstring>
 #include <string>
 #include <windows.h>
-#include <map>
 
 using namespace std;

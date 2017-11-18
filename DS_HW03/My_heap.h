@@ -3,8 +3,6 @@
 class My_heap
 {
 private:
-	map<char, int> priority;
-	//priority mapping
 	vector<char> v;
 	//vector
 	//vector<char>::iterator iter;
@@ -12,6 +10,7 @@ private:
 	int index;
 	//vector's index
 	char tmp;
+	string str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 public:
 	My_heap();
 	~My_heap();
