@@ -60,27 +60,25 @@ void My_heap::reheap_up(int index) {
 
 void My_heap::remove() {
 	printf("size = %d\n", v.size());
-	printf("capacity = %d\n", v.capacity() );
-	//index = v.size() -1;
-	
+	printf("capacity = %d\n", v.capacity());
+	index = v.size() -1;
 	v.at(0) = v.at(index);
 	//copy last value to root
-	v.at(index) = NULL;
-	//v.pop_back();
+	//v.at(index) = NULL;
+	v.pop_back();
 	
 	printf("size = %d\n", v.size());
 	printf("capacity = %d\n", v.capacity());
 	reheap_down(0);
-	index--;
 }
 
 void My_heap::reheap_down(int index) {
 	//reheapification downward, compare index with index's children
-	if (v.at(index * 2 + 1) == NULL) {
+	if ((index*2+1) >= v.size()) {
 		//if index has no child
 		printf("index has no child\n");
 	}
-	else if (v.at(index * 2 + 2) == NULL) {
+	else if ((index*2+2) >= v.size()) {
 		//if index only has left child
 		printf("index only has left child\n");
 		if (v.at(index) >= v.at(index * 2 + 1)) {
