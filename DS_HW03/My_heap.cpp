@@ -35,28 +35,28 @@ void My_heap::reheap_up(int index) {
 	//reheapification upward, compare index with index's parent
 	//pre : index is child's index
 	//post : make heap structure
-	if ((int)floor((index - 1) / 2) < 0) {
+	if (PARENT < 0) {
 		//if index is root (index has no parent)
 		printf("index don't have parent\n");
 	}
 	else {
 		//if index has parent
-		if (v.at((int)floor((index - 1) / 2)) >= v.at(index)) { 
+		if (str.find(v.at(PARENT)) >= str.find(v.at(index))) { 
 			//if parent's value >= index's value
 			printf("parent >= index\n");  
-			printf("parent : %c\n", v.at((int)floor((index - 1) / 2)));
+			printf("parent : %c\n", v.at(PARENT));
 			printf("index : %c\n", v.at(index));
 		}
-		else if (v.at((int)floor((index - 1) / 2)) < v.at(index)) {
+		else if (str.find(v.at(PARENT)) < str.find(v.at(index))) {
 			//if parent's value < index's value
 			printf("parent < index\n");
-			tmp = v.at((int)floor((index - 1) / 2));
-			v.at((int)floor((index - 1) / 2)) = v.at(index);
+			tmp = v.at(PARENT);
+			v.at(PARENT) = v.at(index);
 			v.at(index) = tmp;
-			printf("parent : %c\n", v.at((int)floor((index - 1) / 2)));
+			printf("parent : %c\n", v.at(PARENT));
 			printf("index : %c\n", v.at(index));
 
-			reheap_up((int)floor((index - 1) / 2));
+			reheap_up(PARENT);
 			//recursive reheapification upward
 		}
 	}
@@ -86,48 +86,48 @@ void My_heap::reheap_down(int index) {
 	//reheapification downward, compare index with index's children
 	//pre : index is child's index
 	//post : maintain heap structure
-	if ((index*2+1) >= v.size()) {
+	if (LEFT >= v.size()) {
 		//if index has no child
 		printf("index has no child\n");
 	}
-	else if ((index*2+2) >= v.size()) {
+	else if (RIGHT >= v.size()) {
 		//if index only has left child
 		printf("index only has left child\n");
-		if (v.at(index) >= v.at(index * 2 + 1)) {
+		if (str.find(v.at(index)) >= str.find(v.at(LEFT))) {
 			//if index's value >= left child's value
 			printf("index >= left\n");
 		}
-		else if (v.at(index) < v.at(index * 2 + 1)) {
+		else if (str.find(v.at(index)) < str.find(v.at(LEFT))) {
 			//if index's value < left child's value
 			printf("index < left\n");
 			tmp = v.at(index);
-			v.at(index) = v.at(index * 2 + 1);
-			v.at(index * 2 + 1) = tmp;
+			v.at(index) = v.at(LEFT);
+			v.at(LEFT) = tmp;
 		}
 	}
 	else {
 		//if index has children
-		if (v.at(index) >= v.at(index * 2 + 1) && v.at(index) >= v.at(index * 2 + 2)) {
+		if (str.find(v.at(index)) >= str.find(v.at(LEFT)) && str.find(v.at(index)) >= str.find(v.at(RIGHT))) {
 			//if index's value >= children's value
 			printf("index >= children\n");
 		}
 		else {
-			if (v.at(index * 2 + 1) <= v.at(index * 2 + 2)) {
+			if (str.find(v.at(LEFT)) <= str.find(v.at(RIGHT))) {
 				//if left child's value <= right child's value
 				printf("left <= right\n");
 				tmp = v.at(index);
-				v.at(index) = v.at(index * 2 + 2);
-				v.at(index * 2 + 2) = tmp;
+				v.at(index) = v.at(RIGHT);
+				v.at(RIGHT) = tmp;
 				//swap index's value and right child's value
-				reheap_down(index * 2 + 2);
+				reheap_down(RIGHT);
 				//recursive reheapification downward
 			}
 			else {
 				//if left child's value > right child;s value
 				printf("left > right\n");
 				tmp = v.at(index);
-				v.at(index) = v.at(index * 2 + 1);
-				v.at(index * 2 + 1) = tmp;
+				v.at(index) = v.at(LEFT);
+				v.at(LEFT) = tmp;
 				//swap index's value and left child's value
 				reheap_down(index * 2 + 1);
 				//recursive reheapification downward

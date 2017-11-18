@@ -11,12 +11,12 @@ int main()
 	h.insert('1');
 	h.insert('2');
 	h.insert('3');
-	h.insert('4');
-	h.insert('5');
-	h.insert('6');
-	h.insert('7');
-	h.insert('8');
-	h.insert('9');
+	h.insert('a');
+	h.insert('b');
+	h.insert('c');
+	h.insert('A');
+	h.insert('B');
+	h.insert('C');
 	h.print_heap();
 	
 	h.remove();

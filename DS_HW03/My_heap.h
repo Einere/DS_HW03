@@ -1,8 +1,11 @@
 #pragma once
-
+#define PARENT (int)floor((index - 1) / 2)
+#define LEFT index*2+1
+#define RIGHT index*2+2
 class My_heap
 {
 private:
+
 	vector<char> v;
 	//vector
 	//vector<char>::iterator iter;
@@ -11,6 +14,7 @@ private:
 	//vector's index
 	char tmp;
 	string str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 public:
 	My_heap();
 	~My_heap();
