@@ -27,7 +27,23 @@ int main()
 	h.remove();
 	h.print_vector();
 	*/
+
+	printf("select menu\n");
+	printf("1 : rotated heap\n");
+	printf("2 : non-ratated heap\n");
+	printf("3 : h-tree (not supported)");
+	int menu;
+	scanf_s("%d", &menu, sizeof(menu));
+	h.set_menu(menu);
+
+	switch (menu) {
+	case 1: h.draw_r_heap(); break;
+	case 2: h.draw_heap(); break;
+	}
+	
 	h.print_heap();
+
+
 
 	system("pause");
 	return 0;
