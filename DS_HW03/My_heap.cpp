@@ -14,6 +14,8 @@ My_heap::~My_heap() {
 	//clear vector v
 	vector<char>().swap(v);
 	//fee vector v
+	free_matrix();
+	//free matrix
 }
 
 void My_heap::insert(char input) {
@@ -86,11 +88,11 @@ void My_heap::reheap_down(int index) {
 	//reheapification downward, compare index with index's children
 	//pre : index is child's index
 	//post : maintain heap structure
-	if (LEFT >= v.size()) {
+	if (LEFT >= (int)v.size()) {
 		//if index has no child
 		printf("index has no child\n");
 	}
-	else if (RIGHT >= v.size()) {
+	else if (RIGHT >= (int)v.size()) {
 		//if index only has left child
 		printf("index only has left child\n");
 		if (str.find(v.at(index)) >= str.find(v.at(LEFT))) {
@@ -137,9 +139,80 @@ void My_heap::reheap_down(int index) {
 	return;
 }
 
-void My_heap::print_heap() {
+void My_heap::print_vector() {
 	for (unsigned int i = 0; i < v.size(); i++) {
 		printf("%c", v.at(i));
 	}
 	printf("\n");
+}
+
+void My_heap::calculate() {
+	//calculate row, column and allocate memory for m
+	//pre : size() > 0
+	//post : have allocated memory
+	free_matrix();
+	//free matrix
+	printf("v.size = %d\n", v.size());
+	row = (int)floor(log2(v.size())) + 1;
+	printf("row = %d\n", row);
+	column = (int)pow(2, row) - 1;
+	printf("column = %d\n", column);
+	//calculate row, column
+	matrix = new char*[row];
+	for (int i = 0; i < row; i++) {
+		matrix[i] = new char[column];
+		memset(matrix[i], NULL, column);
+	}
+	
+	//allocate memory
+	printf("allocate complete\n");
+}
+
+void My_heap::free_matrix() {
+	//free matrix
+	//pre : matrix isn't point null
+	//post : clearly free matrix
+	if (matrix != nullptr) {
+		for (int i = 0; i < row; i++) {
+			delete[] matrix[i];
+		}
+		delete[] matrix;
+	}
+}
+
+void My_heap::print_heap() {
+	//pre : exist matrix
+	//post : print matrix
+	calculate();
+	//calculate row, column and allocate memory for matrix
+	int i = 0;
+	int m = 0, n = 0;
+	
+	for (m = (row - 1 - i); m >= 0; i++, m = (row-1-i)) {
+		int l = 0;
+		//printf("m = %d, i = %d\n", m, i);
+		for (n = (int)pow(2, i) - 1; n < column; n += (int)pow(2, i + 1)) {
+			//printf("n = %d, i = %d, l = %d, pow(2, i + 1) - 1 = %d \n", n, i, l, (int)pow(2, i + 1) - 1);
+			if ((int)(pow(2, m) - 1 + l) < v.size()){
+				//if accessable
+				matrix[m][n] = v.at((int)pow(2, m) - 1 + l);
+				printf("v.at() = %c\n", v.at((int)pow(2, m) - 1 + l));
+				printf("matrix[%d][%d] = %c\n",m,n, matrix[m][n]);
+			}
+			l++;
+			//for next node 
+		}
+
+	}
+	printf("draw heap complete\n");
+	//draw heap
+	for (m = 0; m < row; m++) {
+		for (n = 0; n < column; n++) {
+			printf("%c", matrix[m][n]);
+		}
+		printf("\n");
+	}
+	printf("print heap complete\n");
+	//print heap
+	return;
 }
