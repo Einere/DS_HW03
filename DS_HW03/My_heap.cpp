@@ -160,7 +160,7 @@ void My_heap::calculate() {
 	switch (menu) {
 	case 1: 
 		printf("v.size = %d\n", v.size());
-		column = depth;
+		column = depth*2;
 		printf("column = %d\n", column);
 		row = (int)pow(2, depth) - 1;
 		printf("row = %d\n", row);
@@ -209,7 +209,7 @@ void My_heap::draw_heap() {
 	int i = 0, l = 0;
 	int m = 0, n = 0;
 	
-	for (m = (depth - 1 - i); m >= 0; i++, m = (depth - 1 - i)) {
+	for (m = (row - 1 - i); m >= 0; i++, m = (row - 1 - i)) {
 		l = 0;
 		//printf("m = %d, i = %d\n", m, i);
 		for (n = (int)pow(2, i) - 1; n < column; n += (int)pow(2, i + 1)) {
@@ -240,15 +240,15 @@ void My_heap::draw_r_heap() {
 	int i = 0, l = 0;
 	int m = 0, n = 0;
 
-	for (n = (depth - 1 - i); n >= 0; i++, n = (depth - 1 - i)) {
+	for (n = (column - 1 - i); n >= 0; i++, n = (column - 1 - i*2)) {
 		l = 0;
-		printf("n = %d, i = %d\n", n, i);
+		//printf("n = %d, i = %d\n", n, i);
 		for (m = row -1 - ((int)pow(2, i) - 1); m >=0; m -= (int)pow(2, i + 1)) {
-			printf("m = %d, i = %d, l = %d, pow(2, i + 1) - 1 = %d \n", m, i, l, (int)pow(2, i + 1) - 1);
-			if ((unsigned int)(pow(2, n) - 1 + l) < v.size()) {
-				//if (int)(pow(2, n) - 1 + l) accessable
-				matrix[m][n] = v.at((int)pow(2, n) - 1 + l);
-				printf("v.at() = %c\n", v.at((int)pow(2, n) - 1 + l));
+			//printf("m = %d, i = %d, l = %d, pow(2, i + 1) - 1 = %d \n", m, i, l, (int)pow(2, i + 1) - 1);
+			if ((unsigned int)(pow(2, depth - 1 - i) - 1 + l) < v.size()) {
+				//if (int)(pow(2, depth-1-i) - 1 + l) accessable
+				matrix[m][n] = v.at((int)pow(2, depth - 1 - i) - 1 + l);
+				printf("v.at() = %c\n", v.at((int)pow(2, depth - 1 - i) - 1 + l));
 				printf("matrix[%d][%d] = %c\n", m, n, matrix[m][n]);
 			}
 			l++;
