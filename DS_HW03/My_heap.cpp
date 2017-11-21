@@ -173,6 +173,21 @@ void My_heap::calculate() {
 		printf("column = %d\n", column);
 		break;
 	case 3:
+		for (int o_depth = 1; o_depth <= depth; o_depth++) {
+			if (o_depth == 1) {
+				//set row, column to 1
+				row = column = 1;
+				continue;
+			}
+			if (o_depth % 2 == 1) {
+				//if o_depth is odd number
+				row = (row * 2) + 1;
+			}
+			else {
+				//if o_depth is even number
+				column = (column * 2) + 1;
+			}
+		}
 		break;
 	default: printf("select menu 1~3\n"); break;
 	}
@@ -184,7 +199,7 @@ void My_heap::calculate() {
 	}
 	//allocate memory
 	printf("allocate complete\n");
-	printf("matrix[%d][%d]\n", row, column );
+	printf("matrix[%d][%d]\n", _msize(matrix) / sizeof(*matrix), _msize(matrix[0]));
 	return;
 }
 
@@ -229,8 +244,6 @@ void My_heap::draw_heap() {
 	return;
 }
 
-
-
 void My_heap::draw_r_heap() {
 	//draw rotated heap
 	//pre : 
@@ -259,6 +272,12 @@ void My_heap::draw_r_heap() {
 	
 	return;
 }
+
+void My_heap::draw_h_tree() {
+
+}
+
+
 
 void My_heap::print_heap() {
 	//pre : exist matrix

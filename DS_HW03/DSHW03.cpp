@@ -35,6 +35,8 @@ int main()
 	int menu;
 	scanf_s("%d", &menu, sizeof(menu));
 	h.set_menu(menu);
+	//h.calculate();
+
 
 	switch (menu) {
 	case 1: h.draw_r_heap(); break;
