@@ -11,7 +11,7 @@ private:
 	char tmp = NULL;
 	string str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	int depth = 0;
-	int h_depth = 0;
+	int h_depth = 1;
 	//for h-tree
 	int row = 0;
 	int column = 0;
@@ -19,6 +19,10 @@ private:
 	//for matrix
 	int menu = 0;
 	//for print
+	int V[4][2] = { { -1,0 },{ 1,0 },{ 0,1 },{ 0,-1 } };
+	//for h-tree
+	int center = 0;
+	//for h-tree
 
 public:
 	My_heap();
@@ -34,6 +38,7 @@ public:
 	void free_matrix();
 	void draw_heap();
 	void draw_r_heap();
+	void r_draw_h_tree(int index, int i, int j, int H_depth, int U, int D, int R, int L);
 	void draw_h_tree();
 	void print_heap();
 

@@ -17,6 +17,12 @@ int main()
 	h.insert('7');
 	h.insert('8');
 	h.insert('9');
+	h.insert('a');
+	h.insert('b');
+	h.insert('c');
+	h.insert('d');
+	h.insert('e');
+	h.insert('f');
 	h.print_vector();
 	/*
 	h.remove();
@@ -35,16 +41,17 @@ int main()
 	int menu;
 	scanf_s("%d", &menu, sizeof(menu));
 	h.set_menu(menu);
-	//h.calculate();
+	h.calculate();
 
-
+	
 	switch (menu) {
 	case 1: h.draw_r_heap(); break;
 	case 2: h.draw_heap(); break;
+	case 3: h.draw_h_tree(); break;
 	}
 	
 	h.print_heap();
-
+	
 
 
 	system("pause");

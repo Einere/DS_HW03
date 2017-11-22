@@ -157,6 +157,18 @@ void My_heap::calculate() {
 	free_matrix();
 	//free matrix
 	depth = (int)floor(log2(v.size())) + 1;
+	int tmp_size = v.size();
+	while (tmp_size > 7) {
+		h_depth *= 2;
+		tmp_size /= 4;
+	}
+	tmp_size = v.size();
+	while (tmp_size > 0) {
+		center = 2 * center + 1;
+		tmp_size /= 4;
+	}
+	printf("h_depth = %d, center = %d\n", h_depth, center);
+	//calculate h_depth
 	switch (menu) {
 	case 1: 
 		printf("v.size = %d\n", v.size());
@@ -273,9 +285,46 @@ void My_heap::draw_r_heap() {
 	return;
 }
 
-void My_heap::draw_h_tree() {
-
+void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R, int L) {
+	if (index > (int)v.size()) return;
+	//if (depth % 2 == 0) {
+	//	i = floor(i /= 2);
+	//}
+	matrix[i][j] = v.at(index); //9
+	printf("self matrix[%d][%d] = %c\n", i, j, v.at(index));
+	if (LEFT < v.size()) {
+		//for index's left child
+		matrix[i + hd*V[L][0]][j + hd*V[L][1]] = v.at(LEFT); //8
+		printf("left matrix[%d][%d] = %c\n", i + hd*V[L][0], j + hd*V[L][1], v.at(LEFT));
+		My_heap::r_draw_h_tree(4 * index + 3, i + (hd*(V[L][0] + V[U][0])/2), j + hd*(V[L][1] + V[U][1]), hd / 2, D, U, L, R); //7
+		My_heap::r_draw_h_tree(4 * index + 4, i + (hd*(V[L][0] + V[D][0])/2), j + hd*(V[L][1] + V[D][1]), hd / 2, U, D, R, L); //3
+	}
+	if(RIGHT < v.size()) {
+		//for index's right child
+		matrix[i + hd*V[R][0]][j + hd*V[R][1]] = v.at(RIGHT);
+		printf("right matrix[%d][%d] = %c\n", i + hd*V[R][0], j + hd*V[R][1], v.at(RIGHT));
+		My_heap::r_draw_h_tree(4 * index + 5, i + (hd*(V[R][0] + V[D][0])/2), j + hd*(V[R][1] + V[D][1]), hd / 2, U, D, R, L);
+		My_heap::r_draw_h_tree(4 * index + 6, i + (hd*(V[R][0] + V[U][0])/2), j + hd*(V[R][1] + V[U][1]), hd / 2, D, U, L, R);
+	}
 }
+
+void My_heap::draw_h_tree() {
+	index = v.size();
+	
+	if (depth % 2 == 1) {
+		//depth is odd number
+		My_heap::r_draw_h_tree(0, center, center, h_depth, 0, 1, 2, 3);
+	}
+	else {
+		//depth is even number
+		My_heap::r_draw_h_tree(0, center / 2, center, h_depth, 0, 1, 2, 3);
+	}
+	
+	//My_heap::r_draw_h_tree(0, center, center, h_depth, 0, 1, 2, 3);
+	
+	printf("-----------------draw h-tree complete\n");
+}
+
 
 
 
