@@ -15,14 +15,9 @@ int main()
 	h.insert('5');
 	h.insert('6');
 	h.insert('7');
-	h.insert('8');
-	h.insert('9');
-	h.insert('a');
-	h.insert('b');
-	h.insert('c');
-	h.insert('d');
-	h.insert('e');
-	h.insert('f');
+	//h.insert('8');
+	//h.insert('9');
+	
 	h.print_vector();
 	/*
 	h.remove();
