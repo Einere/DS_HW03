@@ -286,10 +286,17 @@ void My_heap::draw_r_heap() {
 }
 
 void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R, int L) {
-	if (index > (int)v.size()) return;
+	if (index >= (int)v.size()) return;
 	if (depth % 2 == 1) {
 		matrix[i][j] = v.at(index); 
 		printf("self matrix[%d][%d] = %c\n", i, j, v.at(index));
+		if (0 < PARENT && PARENT < v.size()) {
+			for (int a = 1; matrix[i+a*V[U][0]][j+a*V[U][1]] == NULL; a++) {
+				matrix[i + a*(V[U][0])][j + a*V[U][1]] = '#';
+				printf("between matrix[%d][%d] = %c\n", i + a*V[U][0], j + a*V[U][1], matrix[i + a*(V[U][0])][j + a*V[U][1]]);
+			}
+		}
+
 		if (LEFT < v.size()) {
 			//for index's left child
 			matrix[i + hd*V[L][0]][j + hd*V[L][1]] = v.at(LEFT); 
@@ -298,6 +305,7 @@ void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R
 				matrix[i + a*V[L][0]][j + a*V[L][1]] = '#';
 				printf("between matrix[%d][%d] = %c\n", i + a*V[L][0], j + a*V[L][1], matrix[i + a*V[L][0]][j + a*V[L][1]]);
 			}
+			//print #
 			My_heap::r_draw_h_tree(4 * index + 3, i + hd*(V[L][0] + V[U][0]), j + hd*(V[L][1] + V[U][1]), hd / 2, D, U, L, R); 
 			My_heap::r_draw_h_tree(4 * index + 4, i + hd*(V[L][0] + V[D][0]), j + hd*(V[L][1] + V[D][1]), hd / 2, U, D, R, L); 
 		}
@@ -309,11 +317,19 @@ void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R
 				matrix[i + a*V[R][0]][j + a*V[R][1]] = '#';
 				printf("between matrix[%d][%d] = %c\n", i + a*V[R][0], j + a*V[R][1], matrix[i + a*V[R][0]][j + a*V[R][1]]);
 			}
+			//print #
 			My_heap::r_draw_h_tree(4 * index + 5, i + hd*(V[R][0] + V[D][0]), j + hd*(V[R][1] + V[D][1]), hd / 2, U, D, R, L);
 			My_heap::r_draw_h_tree(4 * index + 6, i + hd*(V[R][0] + V[U][0]), j + hd*(V[R][1] + V[U][1]), hd / 2, D, U, L, R);
 		}
 	}
 	else {
+		if (0 < PARENT && PARENT < v.size()) {
+			for (int a = 1; matrix[i + a*V[U][0]][j + a*V[U][1]] == NULL; a++) {
+				matrix[i + a*(V[U][0])][j + a*V[U][1]] = '#';
+				printf("between matrix[%d][%d] = %c\n", i + a*V[U][0], j + a*V[U][1], matrix[i + a*(V[U][0])][j + a*V[U][1]]);
+			}
+		}
+		//print #
 		matrix[i][j] = v.at(index); 
 		printf("self matrix[%d][%d] = %c\n", i, j, v.at(index));
 		if (LEFT < v.size()) {
@@ -324,6 +340,7 @@ void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R
 				matrix[i + a*V[L][0]][j + a*V[L][1]] = '#';
 				printf("between matrix[%d][%d] = %c\n", i + a*V[L][0], j + a*V[L][1], matrix[i + a*V[L][0]][j + a*V[L][1]]);
 			}
+			//print #
 			My_heap::r_draw_h_tree(4 * index + 3, i + (hd*(V[L][0] + V[U][0]) / 2), j + hd*(V[L][1] + V[U][1]), hd / 2, D, U, L, R); 
 			My_heap::r_draw_h_tree(4 * index + 4, i + (hd*(V[L][0] + V[D][0]) / 2), j + hd*(V[L][1] + V[D][1]), hd / 2, U, D, R, L); 
 		}
@@ -335,6 +352,7 @@ void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R
 				matrix[i + a*V[R][0]][j + a*V[R][1]] = '#';
 				printf("between matrix[%d][%d] = %c\n", i + a*V[R][0], j + a*V[R][1], matrix[i + a*V[R][0]][j + a*V[R][1]]);
 			}
+			//print #
 			My_heap::r_draw_h_tree(4 * index + 5, i + (hd*(V[R][0] + V[D][0]) / 2), j + hd*(V[R][1] + V[D][1]), hd / 2, U, D, R, L);
 			My_heap::r_draw_h_tree(4 * index + 6, i + (hd*(V[R][0] + V[U][0]) / 2), j + hd*(V[R][1] + V[U][1]), hd / 2, D, U, L, R);
 		}
