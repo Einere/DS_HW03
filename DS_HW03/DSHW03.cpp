@@ -442,6 +442,7 @@ int main() {
 	fs.close();
 	//input and remove
 	h.print_vector();
+	*/
 
 	printf("select menu\n");
 	printf("1 : rotated heap\n");
@@ -452,17 +453,18 @@ int main() {
 	h.set_menu(menu);
 	h.calculate();
 
-
+	
 	switch (menu) {
 	case 1: h.draw_r_heap(); break;
 	case 2: h.draw_heap(); break;
 	case 3: h.draw_h_tree(); break;
 	}
-
+	
 	h.print_heap();
-
+	
 
 	system("pause");
 	return 0;
+    return 0;
 }
 

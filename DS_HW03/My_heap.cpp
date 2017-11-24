@@ -157,7 +157,6 @@ void My_heap::calculate() {
 	free_matrix();
 	//free matrix
 	depth = (int)floor(log2(v.size())) + 1;
-	printf("depth = %d", depth);
 	int tmp_size = v.size();
 	while (tmp_size > 7) {
 		h_depth *= 2;
