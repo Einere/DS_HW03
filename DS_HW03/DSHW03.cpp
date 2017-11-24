@@ -1,5 +1,13 @@
 //Kwang Woon University / computer software / 2013726058 / Choi Hyung Jun
 #include "stdafx.h"
+#include <vector>
+#include <iostream>
+#include <cctype>
+#include <cstring>
+#include <string>
+#include <windows.h>
+#include <fstream>
+using namespace std;
 
 #define PARENT (int)floor((index - 1) / 2)
 #define LEFT index*2+1
