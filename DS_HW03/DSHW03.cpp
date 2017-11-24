@@ -184,7 +184,7 @@ public:
 		h_depth = 1;
 		center = 0;
 		depth = (int)floor(log2(v.size())) + 1;
-		printf("depth = %d", depth);
+		printf("depth = %d\n", depth);
 		int tmp_size = v.size();
 		while (tmp_size > 7) {
 			h_depth *= 2;
@@ -446,26 +446,17 @@ int main() {
 	fs.close();
 	//input and remove
 	h.print_vector();
-
-	printf("select menu\n");
-	printf("1 : rotated heap\n");
-	printf("2 : non-ratated heap\n");
-	printf("3 : h-tree (not supported)");
-	int menu;
-	scanf_s("%d", &menu, sizeof(menu));
-	h.set_menu(menu);
-	h.calculate();
-
-
-	switch (menu) {
-	case 1: h.draw_r_heap(); break;
-	case 2: h.draw_heap(); break;
-	case 3: h.draw_h_tree(); break;
+	
+	for (int menu = 1; menu <= 3; menu++) {
+		h.set_menu(menu);
+		switch (menu) {
+		case 1: h.draw_r_heap(); break;
+		case 2: h.draw_heap(); break;
+		case 3: h.draw_h_tree(); break;
+		}
+		h.print_heap();
 	}
-
-	h.print_heap();
-
-
+	
 	system("pause");
 	return 0;
 }
