@@ -1,4 +1,4 @@
-
+//Kwang Woon University / computer software / 2013726058 / Choi Hyung Jun
 #include "stdafx.h"
 
 #define PARENT (int)floor((index - 1) / 2)
@@ -64,25 +64,17 @@ public:
 		//post : make heap structure
 		if (PARENT < 0) {
 			//if index is root (index has no parent)
-			printf("index don't have parent\n");
 		}
 		else {
 			//if index has parent
 			if (str.find(v.at(PARENT)) >= str.find(v.at(index))) {
 				//if parent's value >= index's value
-				printf("parent >= index\n");
-				printf("parent : %c\n", v.at(PARENT));
-				printf("index : %c\n", v.at(index));
 			}
 			else if (str.find(v.at(PARENT)) < str.find(v.at(index))) {
 				//if parent's value < index's value
-				printf("parent < index\n");
 				tmp = v.at(PARENT);
 				v.at(PARENT) = v.at(index);
 				v.at(index) = tmp;
-				printf("parent : %c\n", v.at(PARENT));
-				printf("index : %c\n", v.at(index));
-
 				reheap_up(PARENT);
 				//recursive reheapification upward
 			}
@@ -96,18 +88,14 @@ public:
 		//post : maintain heap structure
 		if (LEFT >= (int)v.size()) {
 			//if index has no child
-			printf("index has no child\n");
 		}
 		else if (RIGHT >= (int)v.size()) {
 			//if index only has left child
-			printf("index only has left child\n");
 			if (str.find(v.at(index)) >= str.find(v.at(LEFT))) {
 				//if index's value >= left child's value
-				printf("index >= left\n");
 			}
 			else if (str.find(v.at(index)) < str.find(v.at(LEFT))) {
 				//if index's value < left child's value
-				printf("index < left\n");
 				tmp = v.at(index);
 				v.at(index) = v.at(LEFT);
 				v.at(LEFT) = tmp;
@@ -117,12 +105,10 @@ public:
 			//if index has children
 			if (str.find(v.at(index)) >= str.find(v.at(LEFT)) && str.find(v.at(index)) >= str.find(v.at(RIGHT))) {
 				//if index's value >= children's value
-				printf("index >= children\n");
 			}
 			else {
 				if (str.find(v.at(LEFT)) <= str.find(v.at(RIGHT))) {
 					//if left child's value <= right child's value
-					printf("left <= right\n");
 					tmp = v.at(index);
 					v.at(index) = v.at(RIGHT);
 					v.at(RIGHT) = tmp;
@@ -132,7 +118,6 @@ public:
 				}
 				else {
 					//if left child's value > right child;s value
-					printf("left > right\n");
 					tmp = v.at(index);
 					v.at(index) = v.at(LEFT);
 					v.at(LEFT) = tmp;
@@ -151,15 +136,10 @@ public:
 		//post : maintain heap structure
 		if (v.empty()) return;
 		//if don't exist node, do nothing
-		printf("size = %d\n", v.size());
-		printf("capacity = %d\n", v.capacity());
 		index = v.size() - 1;
 		v.at(0) = v.at(index);
 		//copy last value to root
 		v.pop_back();
-
-		printf("size = %d\n", v.size());
-		printf("capacity = %d\n", v.capacity());
 		reheap_down(0);
 		//recursive reheapification downward
 	}
@@ -184,7 +164,6 @@ public:
 		h_depth = 1;
 		center = 0;
 		depth = (int)floor(log2(v.size())) + 1;
-		printf("depth = %d\n", depth);
 		int tmp_size = v.size();
 		while (tmp_size > 7) {
 			h_depth *= 2;
@@ -195,22 +174,15 @@ public:
 			center = 2 * center + 1;
 			tmp_size /= 4;
 		}
-		printf("h_depth = %d, center = %d\n", h_depth, center);
 		//calculate h_depth
 		switch (menu) {
 		case 1:
-			printf("v.size = %d\n", v.size());
 			column = depth * 2;
-			printf("column = %d\n", column);
 			row = (int)pow(2, depth) - 1;
-			printf("row = %d\n", row);
 			break;
 		case 2:
-			printf("v.size = %d\n", v.size());
 			row = depth;
-			printf("row = %d\n", row);
 			column = (int)pow(2, depth) - 1;
-			printf("column = %d\n", column);
 			break;
 		case 3:
 			for (int o_depth = 1; o_depth <= depth; o_depth++) {
@@ -238,8 +210,7 @@ public:
 			memset(matrix[i], NULL, column);
 		}
 		//allocate memory
-		printf("allocate complete\n");
-		printf("matrix[%d][%d]\n", _msize(matrix) / sizeof(*matrix), _msize(matrix[0]));
+		printf("---------- allocate complete ----------\n");
 		return;
 	}
 
@@ -266,20 +237,16 @@ public:
 
 		for (m = (row - 1 - i); m >= 0; i++, m = (row - 1 - i)) {
 			l = 0;
-			//printf("m = %d, i = %d\n", m, i);
 			for (n = (int)pow(2, i) - 1; n < column; n += (int)pow(2, i + 1)) {
-				//printf("n = %d, i = %d, l = %d, pow(2, i + 1) - 1 = %d \n", n, i, l, (int)pow(2, i + 1) - 1);
 				if ((unsigned int)(pow(2, m) - 1 + l) < v.size()) {
 					//if (int)pow(2, m) - 1 + l) is accessable
 					matrix[m][n] = v.at((int)pow(2, m) - 1 + l);
-					printf("v.at() = %c\n", v.at((int)pow(2, m) - 1 + l));
-					printf("matrix[%d][%d] = %c\n", m, n, matrix[m][n]);
 				}
 				l++;
 				//for next node 
 			}
 		}
-		printf("-----------------draw non-rotated heap complete\n");
+		printf("---------- draw non-rotated heap complete ----------\n");
 
 		return;
 	}
@@ -295,20 +262,16 @@ public:
 
 		for (n = (column - 1 - i); n >= 0; i++, n = (column - 1 - i * 2)) {
 			l = 0;
-			//printf("n = %d, i = %d\n", n, i);
 			for (m = row - 1 - ((int)pow(2, i) - 1); m >= 0; m -= (int)pow(2, i + 1)) {
-				//printf("m = %d, i = %d, l = %d, pow(2, i + 1) - 1 = %d \n", m, i, l, (int)pow(2, i + 1) - 1);
 				if ((unsigned int)(pow(2, depth - 1 - i) - 1 + l) < v.size()) {
 					//if (int)(pow(2, depth-1-i) - 1 + l) accessable
 					matrix[m][n] = v.at((int)pow(2, depth - 1 - i) - 1 + l);
-					printf("v.at() = %c\n", v.at((int)pow(2, depth - 1 - i) - 1 + l));
-					printf("matrix[%d][%d] = %c\n", m, n, matrix[m][n]);
 				}
 				l++;
 				//for next node 
 			}
 		}
-		printf("-----------------draw rotated heap complete\n");
+		printf("---------- draw rotated heap complete ----------\n");
 
 		return;
 	}
@@ -316,71 +279,61 @@ public:
 	void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R, int L) {
 		if (index >= (int)v.size()) return;
 		if (depth % 2 == 1) {
+			//if depth is odd num
 			matrix[i][j] = v.at(index);
-			printf("self matrix[%d][%d] = %c\n", i, j, v.at(index));
 			if (0 < PARENT && PARENT < v.size()) {
 				for (int a = 1; matrix[i + a*V[U][0]][j + a*V[U][1]] == NULL; a++) {
+					//print # vertically
 					matrix[i + a*(V[U][0])][j + a*V[U][1]] = '#';
-					printf("between matrix[%d][%d] = %c\n", i + a*V[U][0], j + a*V[U][1], matrix[i + a*(V[U][0])][j + a*V[U][1]]);
 				}
 			}
-
 			if (LEFT < v.size()) {
 				//for index's left child
 				matrix[i + hd*V[L][0]][j + hd*V[L][1]] = v.at(LEFT);
-				printf("left matrix[%d][%d] = %c\n", i + hd*V[L][0], j + hd*V[L][1], v.at(LEFT));
 				for (int a = 1; matrix[i + a*V[L][0]][j + a*V[L][1]] == NULL; a++) {
+					//print # horizontally
 					matrix[i + a*V[L][0]][j + a*V[L][1]] = '#';
-					printf("between matrix[%d][%d] = %c\n", i + a*V[L][0], j + a*V[L][1], matrix[i + a*V[L][0]][j + a*V[L][1]]);
 				}
-				//print #
 				My_heap::r_draw_h_tree(4 * index + 3, i + hd*(V[L][0] + V[U][0]), j + hd*(V[L][1] + V[U][1]), hd / 2, D, U, L, R);
 				My_heap::r_draw_h_tree(4 * index + 4, i + hd*(V[L][0] + V[D][0]), j + hd*(V[L][1] + V[D][1]), hd / 2, U, D, R, L);
 			}
 			if (RIGHT < v.size()) {
 				//for index's right child
 				matrix[i + hd*V[R][0]][j + hd*V[R][1]] = v.at(RIGHT);
-				printf("right matrix[%d][%d] = %c\n", i + hd*V[R][0], j + hd*V[R][1], v.at(RIGHT));
 				for (int a = 1; matrix[i + a*V[R][0]][j + a*V[R][1]] == NULL; a++) {
 					matrix[i + a*V[R][0]][j + a*V[R][1]] = '#';
-					printf("between matrix[%d][%d] = %c\n", i + a*V[R][0], j + a*V[R][1], matrix[i + a*V[R][0]][j + a*V[R][1]]);
 				}
-				//print #
+				//print # horizontally
 				My_heap::r_draw_h_tree(4 * index + 5, i + hd*(V[R][0] + V[D][0]), j + hd*(V[R][1] + V[D][1]), hd / 2, U, D, R, L);
 				My_heap::r_draw_h_tree(4 * index + 6, i + hd*(V[R][0] + V[U][0]), j + hd*(V[R][1] + V[U][1]), hd / 2, D, U, L, R);
 			}
 		}
 		else {
+			//if depth is even num
 			if (0 < PARENT && PARENT < v.size()) {
+				//print # vertically
 				for (int a = 1; matrix[i + a*V[U][0]][j + a*V[U][1]] == NULL; a++) {
 					matrix[i + a*(V[U][0])][j + a*V[U][1]] = '#';
-					printf("between matrix[%d][%d] = %c\n", i + a*V[U][0], j + a*V[U][1], matrix[i + a*(V[U][0])][j + a*V[U][1]]);
 				}
 			}
-			//print #
 			matrix[i][j] = v.at(index);
-			printf("self matrix[%d][%d] = %c\n", i, j, v.at(index));
 			if (LEFT < v.size()) {
 				//for index's left child
 				matrix[i + hd*V[L][0]][j + hd*V[L][1]] = v.at(LEFT);
-				printf("left matrix[%d][%d] = %c\n", i + hd*V[L][0], j + hd*V[L][1], v.at(LEFT));
 				for (int a = 1; matrix[i + a*V[L][0]][j + a*V[L][1]] == NULL; a++) {
+					//print # horizontally
 					matrix[i + a*V[L][0]][j + a*V[L][1]] = '#';
-					printf("between matrix[%d][%d] = %c\n", i + a*V[L][0], j + a*V[L][1], matrix[i + a*V[L][0]][j + a*V[L][1]]);
 				}
-				//print #
 				My_heap::r_draw_h_tree(4 * index + 3, i + (hd*(V[L][0] + V[U][0]) / 2), j + hd*(V[L][1] + V[U][1]), hd / 2, D, U, L, R);
 				My_heap::r_draw_h_tree(4 * index + 4, i + (hd*(V[L][0] + V[D][0]) / 2), j + hd*(V[L][1] + V[D][1]), hd / 2, U, D, R, L);
 			}
 			if (RIGHT < v.size()) {
 				//for index's right child
 				matrix[i + hd*V[R][0]][j + hd*V[R][1]] = v.at(RIGHT);
-				printf("right matrix[%d][%d] = %c\n", i + hd*V[R][0], j + hd*V[R][1], v.at(RIGHT));
 				for (int a = 1; matrix[i + a*V[R][0]][j + a*V[R][1]] == NULL; a++) {
+					//print # horizontally
 					matrix[i + a*V[R][0]][j + a*V[R][1]] = '#';
-					printf("between matrix[%d][%d] = %c\n", i + a*V[R][0], j + a*V[R][1], matrix[i + a*V[R][0]][j + a*V[R][1]]);
 				}
-				//print #
 				My_heap::r_draw_h_tree(4 * index + 5, i + (hd*(V[R][0] + V[D][0]) / 2), j + hd*(V[R][1] + V[D][1]), hd / 2, U, D, R, L);
 				My_heap::r_draw_h_tree(4 * index + 6, i + (hd*(V[R][0] + V[U][0]) / 2), j + hd*(V[R][1] + V[U][1]), hd / 2, D, U, L, R);
 			}
@@ -398,7 +351,7 @@ public:
 			//depth is even number
 			My_heap::r_draw_h_tree(0, center / 2, center, h_depth, 0, 1, 2, 3);
 		}
-		printf("-----------------draw h-tree complete\n");
+		printf("---------- draw h-tree complete ----------\n");
 	}
 
 	void My_heap::print_heap() {
@@ -411,7 +364,7 @@ public:
 			}
 			printf("\n");
 		}
-		printf("-----------------print heap complete\n");
+		printf("---------- print heap complete ----------\n\n");
 		//print all heap
 		return;
 	}
@@ -430,7 +383,6 @@ int main() {
 		if (pbuf->sgetc() == 'I') {
 			pbuf->sbumpc();
 			pbuf->sbumpc();
-			//printf("h.insert(%c);\n", pbuf->sgetc());
 			h.insert(pbuf->sbumpc());
 			pbuf->sbumpc();
 			cmd_num--;
@@ -438,7 +390,6 @@ int main() {
 		else if (pbuf->sgetc() == 'D') {
 			pbuf->sbumpc();
 			pbuf->sbumpc();
-			//cout << "h.remove();" << endl;
 			h.remove();
 			cmd_num--;
 		}
