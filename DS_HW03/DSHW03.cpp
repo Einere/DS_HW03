@@ -1,3 +1,4 @@
+
 #include "stdafx.h"
 
 #define PARENT (int)floor((index - 1) / 2)
@@ -180,6 +181,8 @@ public:
 		//post : have allocated memory
 		free_matrix();
 		//free matrix
+		h_depth = 1;
+		center = 0;
 		depth = (int)floor(log2(v.size())) + 1;
 		printf("depth = %d", depth);
 		int tmp_size = v.size();
@@ -385,6 +388,7 @@ public:
 	}
 
 	void My_heap::draw_h_tree() {
+		calculate();
 		index = v.size();
 		if (depth % 2 == 1) {
 			//depth is odd number
