@@ -158,6 +158,8 @@ void My_heap::calculate() {
 	//free matrix
 	depth = (int)floor(log2(v.size())) + 1;
 	printf("depth = %d", depth);
+	h_depth = 1;
+	center = 0;
 	int tmp_size = v.size();
 	while (tmp_size > 7) {
 		h_depth *= 2;
@@ -361,6 +363,7 @@ void My_heap::r_draw_h_tree(int index, int i, int j, int hd, int U, int D, int R
 }
 
 void My_heap::draw_h_tree() {
+	calculate();
 	index = v.size();
 	if (depth % 2 == 1) {
 		//depth is odd number
